@@ -1,0 +1,18 @@
+# Your project name!
+name: magento-community-edition
+recipe: lamp
+config:
+  webroot: .
+  php: 7.2
+  xdebug: false
+services:
+  appserver:
+    type: php:7.2
+    build_as_root:
+      - apt-get update -y && apt-get install libxslt1-dev -y
+      - docker-php-ext-install xsl
+      - docker-php-ext-enable xsl
+tooling:
+  magento:
+    service: appserver
+    cmd: php bin/magento
